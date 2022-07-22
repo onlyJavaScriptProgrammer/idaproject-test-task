@@ -9,6 +9,11 @@
         <add-card />
         <add-card />
         <add-card />
+        <add-card />
+        <add-card />
+        <add-card />
+        <add-card />
+        <add-card />
       </div>
     </main>
   </div>
@@ -37,7 +42,9 @@ export default {
 .main {
   display: flex;
   align-items: flex-start;
+  justify-content: flex-end;
   &__grid {
+    width: 1028px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;

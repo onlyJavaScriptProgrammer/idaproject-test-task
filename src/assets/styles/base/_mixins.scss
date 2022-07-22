@@ -20,23 +20,12 @@
 }
 
 @mixin title_form {
-  position: relative;
-  display: inline-block;
+  display: flex;
+  justify-content: flex-start;
   color: $text_form;
   font-size: 10px;
   line-height: 13px;
   margin-bottom: 4px;
   font-weight: 400;
   letter-spacing: -0.02em;
-  &::after {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    border-radius: 100%;
-    background: #ff8484;
-    right: -4px;
-    top: 0;
-  }
 }

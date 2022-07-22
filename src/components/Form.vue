@@ -1,7 +1,10 @@
 <template>
   <form action="#" class="form">
     <div class="form__name">
-      <div class="form__name_title">Наименование товара</div>
+      <div class="form__name_title">
+        <div>Наименование товара</div>
+        <span></span>
+      </div>
       <input
         type="text"
         class="form__name_input"
@@ -18,7 +21,10 @@
       ></textarea>
     </div>
     <div class="form__links">
-      <div class="form__links_title">Ссылка на изображение товара</div>
+      <div class="form__links_title">
+        <div>Ссылка на изображение товара</div>
+        <span></span>
+      </div>
       <input
         type="text"
         class="form__links_input"
@@ -27,7 +33,10 @@
       />
     </div>
     <div class="form__price">
-      <div class="form__price_title">Цена товара</div>
+      <div class="form__price_title">
+        <div>Цена товара</div>
+        <span></span>
+      </div>
       <input
         type="text"
         class="form__price_input"
@@ -54,6 +63,8 @@ export default {
     0px 6px 10px rgba(0, 0, 0, 0.02);
   border-radius: 4px;
   padding: 24px;
+  position: sticky;
+  top: 0;
   margin-right: 16px;
   &__name {
     margin-bottom: 16px;
@@ -76,6 +87,14 @@ export default {
       height: 108px;
       padding: 10px 0 0 16px;
       resize: none;
+      &:focus {
+        outline: none;
+        border: 1px solid #9b9999;
+      }
+      &:hover {
+        transform: translateY(1px);
+        transition: 0.5ms all;
+      }
     }
   }
   &__links {
@@ -120,13 +139,21 @@ export default {
   }
 }
 span {
-  position: absolute;
   display: block;
   width: 4px;
   height: 4px;
   border-radius: 100%;
   background: #ff8484;
-  right: -4px;
-  top: 0;
+}
+
+input {
+  &:focus {
+    outline: none;
+    border: 1px solid #9b9999;
+  }
+  &:hover {
+    transform: translateY(1px);
+    transition: 0.5ms all;
+  }
 }
 </style>

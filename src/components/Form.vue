@@ -6,6 +6,7 @@
         type="text"
         class="form__name_input"
         placeholder="Введите наименование товара"
+        required
       />
     </div>
     <div class="form__descr">
@@ -22,11 +23,17 @@
         type="text"
         class="form__links_input"
         placeholder="Введите ссылку"
+        required
       />
     </div>
     <div class="form__price">
       <div class="form__price_title">Цена товара</div>
-      <input type="text" class="form__price_input" placeholder="Введите цену" />
+      <input
+        type="text"
+        class="form__price_input"
+        placeholder="Введите цену"
+        required
+      />
     </div>
     <button class="form__submit" disabled>Добавить товар</button>
   </form>
@@ -41,12 +48,13 @@ export default {
 <style lang="scss" scoped>
 .form {
   width: 332px;
-  height: 440px;
+  min-height: 440px;
   background: #fffefb;
   box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04),
     0px 6px 10px rgba(0, 0, 0, 0.02);
   border-radius: 4px;
   padding: 24px;
+  margin-right: 16px;
   &__name {
     margin-bottom: 16px;
     &_title {
@@ -110,5 +118,15 @@ export default {
       box-shadow: none;
     }
   }
+}
+span {
+  position: absolute;
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-radius: 100%;
+  background: #ff8484;
+  right: -4px;
+  top: 0;
 }
 </style>

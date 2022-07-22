@@ -31,7 +31,6 @@ export default {
     @include base_inp;
     width: 121.49px;
     height: 36px;
-    padding: 10px 16px 11px;
   }
 }
 </style>

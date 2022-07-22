@@ -33,5 +33,25 @@ export default {
   &__wrap {
     padding: 0 16px 24px;
   }
+  &__title {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 25px;
+    color: $text_card;
+    margin-bottom: 16px;
+  }
+  &__descr {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: $text_card;
+    margin-bottom: 32px;
+  }
+  &__price {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 30px;
+    color: $text_card;
+  }
 }
 </style>

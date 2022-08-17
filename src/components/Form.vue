@@ -1,6 +1,6 @@
 <template>
   <form action="#" class="form">
-    <div class="form__name">
+    <div class="form__name" :class="{ mbn: isDangerTitle }">
       <div class="form__name_title">
         <div>Наименование товара</div>
         <span></span>
@@ -9,9 +9,12 @@
         type="text"
         class="form__name_input"
         placeholder="Введите наименование товара"
-        required
+        :class="{ danger: isDangerTitle }"
+        v-model="title"
+        @input="validate"
       />
     </div>
+    <div class="valid" v-if="isDangerTitle">Поле является обязательным</div>
     <div class="form__descr">
       <div class="form__descr_title">Описание товара</div>
       <textarea
@@ -20,7 +23,7 @@
         placeholder="Введите описание товара"
       ></textarea>
     </div>
-    <div class="form__links">
+    <div class="form__links" :class="{ mbn: isDangerLink }">
       <div class="form__links_title">
         <div>Ссылка на изображение товара</div>
         <span></span>
@@ -29,10 +32,13 @@
         type="text"
         class="form__links_input"
         placeholder="Введите ссылку"
-        required
+        :class="{ danger: isDangerLink }"
+        v-model="link"
+        @input="validate"
       />
     </div>
-    <div class="form__price">
+    <div class="valid" v-if="isDangerLink">Поле является обязательным</div>
+    <div class="form__price" :class="{ mbn: isDangerPrice }">
       <div class="form__price_title">
         <div>Цена товара</div>
         <span></span>
@@ -41,16 +47,55 @@
         type="text"
         class="form__price_input"
         placeholder="Введите цену"
-        required
+        :class="{ danger: isDangerPrice }"
+        v-model="price"
+        @input="validate"
       />
     </div>
-    <button class="form__submit" disabled>Добавить товар</button>
+    <div class="valid" v-if="isDangerPrice">Поле является обязательным</div>
+    <button class="form__submit" :disabled="isDisabled">Добавить товар</button>
   </form>
 </template>
 
 <script>
 export default {
   name: "AddForm",
+  data() {
+    return {
+      isDisabled: true,
+      isDangerTitle: false,
+      isDangerLink: false,
+      isDangerPrice: false,
+      title: null,
+      link: null,
+      price: null,
+    };
+  },
+  methods: {
+    validate() {
+      if (!this.title) {
+        this.isDangerTitle = true;
+      } else {
+        this.isDangerTitle = false;
+      }
+
+      if (!this.link) {
+        this.isDangerLink = true;
+      } else {
+        this.isDangerLink = false;
+      }
+
+      if (!this.price) {
+        this.isDangerPrice = true;
+      } else {
+        this.isDangerPrice = false;
+      }
+
+      !this.title || !this.link || !this.price
+        ? (this.isDisabled = true)
+        : (this.isDisabled = false);
+    },
+  },
 };
 </script>
 
@@ -109,7 +154,6 @@ export default {
     }
   }
   &__price {
-    margin-bottom: 24px;
     &_title {
       @include title_form;
     }
@@ -131,6 +175,8 @@ export default {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     border: none;
     cursor: pointer;
+    margin-top: 24px;
+    color: #ffffff;
     &:disabled {
       background: #eeeeee;
       color: #b4b4b4;
@@ -143,7 +189,7 @@ span {
   width: 4px;
   height: 4px;
   border-radius: 100%;
-  background: #ff8484;
+  background: $valid_form;
 }
 
 input {
@@ -155,5 +201,24 @@ input {
     transform: translateY(1px);
     transition: 0.5ms all;
   }
+}
+.danger {
+  border: 1px solid $valid_form;
+  &:focus {
+    outline: none;
+    border: 1px solid $valid_form;
+  }
+}
+
+.valid {
+  font-weight: 400;
+  font-size: 8px;
+  line-height: 10px;
+  color: $valid_form;
+  margin: 4px 0 2px 0;
+}
+
+.mbn {
+  margin-bottom: 0;
 }
 </style>

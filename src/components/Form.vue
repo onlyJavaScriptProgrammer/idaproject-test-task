@@ -48,8 +48,9 @@
         class="form__price_input"
         placeholder="Введите цену"
         :class="{ danger: isDangerPrice }"
-        v-model="price"
+        v-model.number="price"
         @input="validate"
+        @blur="setMask"
       />
     </div>
     <div class="valid" v-if="isDangerPrice">Поле является обязательным</div>
@@ -94,6 +95,9 @@ export default {
       !this.title || !this.link || !this.price
         ? (this.isDisabled = true)
         : (this.isDisabled = false);
+    },
+    setMask() {
+      this.price = this.price.toLocaleString("ru");
     },
   },
 };

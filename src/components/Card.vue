@@ -2,19 +2,40 @@
   <div class="card">
     <img src="../static/img/card_img.png" alt="good" class="card__img" />
     <div class="card__wrap">
-      <div class="card__title">Название товара</div>
+      <div class="card__title">{{ titleCard }}</div>
       <div class="card__descr">
-        Довольно-таки интересное описание товара в несколько строк.
-        Довольно-таки интересное описание товара в несколько строк
+        {{ descrCard ? descrCard : this.defaultDescr }}
       </div>
-      <div class="card__price">10 000 руб.</div>
+      <div class="card__price">{{ priceCard }} руб.</div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "AddCard",
+  props: {
+    titleCard: {
+      type: String,
+      required: true,
+    },
+    linkCard: {
+      type: String,
+      required: true,
+    },
+    priceCard: {
+      type: String,
+      required: true,
+    },
+    descrCard: {
+      type: String,
+    },
+  },
+  computed: {
+    ...mapState(["defaultDescr"]),
+  },
 };
 </script>
 
@@ -26,6 +47,7 @@ export default {
   box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04),
     0px 6px 10px rgba(0, 0, 0, 0.02);
   border-radius: 4px;
+  position: relative;
   &__img {
     border-radius: 4px 4px 0px 0px;
     margin-bottom: 16px;
@@ -52,6 +74,8 @@ export default {
     font-size: 24px;
     line-height: 30px;
     color: $text_card;
+    position: absolute;
+    bottom: 24px;
   }
 }
 </style>

@@ -5,6 +5,7 @@
       <option value="#" hidden>По умолчанию</option>
       <option value="">По возрастанию цены</option>
       <option value="">По убыванию цены</option>
+      <option value="">По наименованию</option>
     </select>
   </header>
 </template>

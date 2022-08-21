@@ -21,6 +21,7 @@
         name="description"
         class="form__descr_textarea"
         placeholder="Введите описание товара"
+        v-model="descr"
       ></textarea>
     </div>
     <div class="form__links" :class="{ mbn: isDangerLink }">
@@ -29,7 +30,7 @@
         <span></span>
       </div>
       <input
-        type="text"
+        type="url"
         class="form__links_input"
         placeholder="Введите ссылку"
         :class="{ danger: isDangerLink }"
@@ -54,11 +55,19 @@
       />
     </div>
     <div class="valid" v-if="isDangerPrice">Поле является обязательным</div>
-    <button class="form__submit" :disabled="isDisabled">Добавить товар</button>
+    <button
+      class="form__submit"
+      :disabled="isDisabled"
+      @click.prevent="pushData"
+    >
+      Добавить товар
+    </button>
   </form>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 export default {
   name: "AddForm",
   data() {
@@ -70,9 +79,23 @@ export default {
       title: null,
       link: null,
       price: null,
+      descr: null,
     };
   },
   methods: {
+    ...mapMutations(["addCard"]),
+    pushData() {
+      const dataCard = {
+        id: Number(new Date()),
+        title: this.title,
+        link: this.link,
+        price: this.price,
+        descr: this.descr,
+      };
+      this.addCard(dataCard);
+      this.isDisabled = true;
+      this.title = this.link = this.price = this.descr = "";
+    },
     validate() {
       if (!this.title) {
         this.isDangerTitle = true;

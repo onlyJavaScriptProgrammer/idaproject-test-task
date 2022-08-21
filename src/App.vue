@@ -3,17 +3,18 @@
     <add-header />
     <main class="main">
       <add-form />
-      <div class="main__grid">
-        <add-card />
-        <add-card />
-        <add-card />
-        <add-card />
-        <add-card />
-        <add-card />
-        <add-card />
-        <add-card />
-        <add-card />
-        <add-card />
+      <div class="main__grid" v-if="isVisible">
+        <add-card
+          v-for="good in getGoods"
+          :key="good.id"
+          :titleCard="good.title"
+          :linkCard="good.link"
+          :priceCard="good.price"
+          :descrCard="good.descr"
+        />
+      </div>
+      <div class="main__none" v-if="!isVisible">
+        Здесь пока что ничего нет...
       </div>
     </main>
   </div>
@@ -24,12 +25,27 @@ import AddHeader from "./components/Header.vue";
 import AddForm from "./components/Form.vue";
 import AddCard from "./components/Card.vue";
 
+import { mapState } from "vuex";
+import { mapMutations } from "vuex";
+import { mapGetters } from "vuex";
+
 export default {
   name: "App",
   components: {
     AddForm,
     AddHeader,
     AddCard,
+  },
+  created() {
+    this.getCards();
+    this.getGoods;
+  },
+  methods: {
+    ...mapMutations(["getCards"]),
+  },
+  computed: {
+    ...mapState(["isVisible"]),
+    ...mapGetters(["getGoods"]),
   },
 };
 </script>
@@ -42,12 +58,15 @@ export default {
 .main {
   display: flex;
   align-items: flex-start;
-  justify-content: flex-end;
+  justify-content: flex-start;
   &__grid {
     width: 1028px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
+  }
+  &__none {
+    font-weight: 400;
   }
 }
 </style>
